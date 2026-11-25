@@ -3,8 +3,10 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { v2 as cloudinary } from 'cloudinary';
+import { Files } from 'files-sdk';
+import { neon } from 'files-sdk/neon';
 import sharp from 'sharp';
-import { cloudinaryEnabled, env } from '../config/env.js';
+import { cloudinaryEnabled, env, neonStorageEnabled } from '../config/env.js';
 import { badRequest } from '../utils/http.js';
 
 export const UPLOAD_DIR = process.env.UPLOAD_DIR
@@ -35,8 +37,10 @@ const ALLOWED: Record<string, { kind: MediaKind; ext: string }> = {
 };
 export const ALLOWED_MIME_TYPES = Object.keys(ALLOWED);
 
+export type StorageProviderName = 'CLOUDINARY' | 'LOCAL' | 'NEON';
+
 export interface StoredFile {
-  provider: 'CLOUDINARY' | 'LOCAL';
+  provider: StorageProviderName;
   publicId: string;
   url: string;
   secureUrl: string;
@@ -52,8 +56,12 @@ export interface StoredFile {
 export async function inspectFile(buffer: Buffer, declaredMime: string) {
   const rule = ALLOWED[declaredMime];
   if (!rule) throw badRequest(`Unsupported file type: ${declaredMime}. Allowed: JPG, PNG, WebP, GIF, AVIF, MP4, WebM, PDF`);
-  const limitMb = rule.kind === 'VIDEO' ? env.MAX_VIDEO_MB : env.MAX_IMAGE_MB;
-  if (buffer.length > limitMb * 1024 * 1024) throw badRequest(`File exceeds the ${limitMb} MB limit`);
+  const configuredMb = rule.kind === 'VIDEO' ? env.MAX_VIDEO_MB : env.MAX_IMAGE_MB;
+  // Vercel rejects request bodies above 4.5 MB before this code runs. Fail a little earlier with a clear message.
+  const limitMb = process.env.VERCEL ? Math.min(configuredMb, 4) : configuredMb;
+  if (buffer.length > limitMb * 1024 * 1024) {
+    throw badRequest(process.env.VERCEL && configuredMb > limitMb ? 'File exceeds the 4 MB limit of this host. Compress the file and try again.' : `File exceeds the ${limitMb} MB limit`);
+  }
 
   if (rule.kind === 'IMAGE') {
     try {
@@ -119,13 +127,56 @@ function uploadCloudinary(buffer: Buffer, mimeType: string, info: Awaited<Return
   });
 }
 
+const PUBLIC_CACHE = 'public, max-age=31536000, immutable';
+
+let neonFiles: Files | null = null;
+
+function objectStorage() {
+  if (!neonFiles) {
+    const endpoint = env.AWS_ENDPOINT_URL_S3.replace(/\/$/, '');
+    const bucket = env.NEON_STORAGE_BUCKET;
+    neonFiles = new Files({
+      adapter: neon({ bucket, publicBaseUrl: `${endpoint}/${bucket}` }),
+    });
+  }
+  return neonFiles;
+}
+
+async function uploadNeon(buffer: Buffer, mimeType: string, info: Awaited<ReturnType<typeof inspectFile>>): Promise<StoredFile> {
+  const now = new Date();
+  const dir = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}`;
+  const id = crypto.randomUUID();
+  const publicId = `${dir}/${id}.${info.ext}`;
+  const files = objectStorage();
+  await files.upload(publicId, buffer, { contentType: mimeType, cacheControl: PUBLIC_CACHE });
+  if (info.kind === 'IMAGE' && mimeType !== 'image/gif') {
+    for (const width of LOCAL_VARIANT_WIDTHS) {
+      const variant = await sharp(buffer).rotate().resize({ width, withoutEnlargement: true }).webp({ quality: 80 }).toBuffer();
+      await files.upload(`${dir}/${id}-w${width}.webp`, variant, { contentType: 'image/webp', cacheControl: PUBLIC_CACHE });
+    }
+  }
+  const url = await files.url(publicId);
+  return { provider: 'NEON', publicId, url, secureUrl: url, mimeType, type: info.kind, fileSize: buffer.length, width: info.width, height: info.height, duration: null };
+}
+
 export async function storeFile(buffer: Buffer, mimeType: string): Promise<StoredFile> {
   const info = await inspectFile(buffer, mimeType);
+  if (neonStorageEnabled) return uploadNeon(buffer, mimeType, info);
   return cloudinaryEnabled ? uploadCloudinary(buffer, mimeType, info) : uploadLocal(buffer, mimeType, info);
 }
 
-export async function removeFile(provider: 'CLOUDINARY' | 'LOCAL', publicId: string, type: MediaKind) {
+export async function removeFile(provider: StorageProviderName, publicId: string, type: MediaKind) {
   try {
+    if (provider === 'NEON') {
+      if (!neonStorageEnabled) return;
+      const files = objectStorage();
+      await files.delete(publicId);
+      if (type === 'IMAGE') {
+        const base = publicId.replace(/\.[a-z0-9]+$/i, '');
+        for (const width of LOCAL_VARIANT_WIDTHS) await files.delete(`${base}-w${width}.webp`).catch(() => undefined);
+      }
+      return;
+    }
     if (provider === 'CLOUDINARY') {
       if (!cloudinaryEnabled) return;
       await cloudinary.uploader.destroy(publicId, { resource_type: type === 'VIDEO' ? 'video' : 'image' });

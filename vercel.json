@@ -1,0 +1,27 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "client": {
+      "root": "client",
+      "framework": "vite"
+    },
+    "server": {
+      "root": "server",
+      "framework": "express",
+      "entrypoint": "src/index.ts",
+      "buildCommand": "prisma generate && prisma migrate deploy",
+      "functions": {
+        "src/index.ts": {
+          "memory": 1024,
+          "maxDuration": 10
+        }
+      }
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": { "service": "server" } },
+    { "source": "/sitemap.xml", "destination": { "service": "server" } },
+    { "source": "/robots.txt", "destination": { "service": "server" } },
+    { "source": "/(.*)", "destination": { "service": "client" } }
+  ]
+}

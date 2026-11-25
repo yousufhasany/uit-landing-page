@@ -78,6 +78,7 @@ enum MediaType {
 enum StorageProvider {
   CLOUDINARY
   LOCAL
+  NEON
 }
 
 enum AnnouncementType {

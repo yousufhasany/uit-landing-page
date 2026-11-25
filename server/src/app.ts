@@ -5,12 +5,12 @@ import cors from 'cors';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
-import { allowedOrigins, isProduction } from './config/env.js';
+import { isProduction } from './config/env.js';
 import { siteController } from './controllers/admin.controller.js';
 import { UPLOAD_DIR } from './lib/storage.js';
 import { authenticate } from './middleware/auth.js';
 import { errorHandler, notFoundHandler } from './middleware/error-handler.js';
-import { verifyOrigin } from './middleware/origin.js';
+import { isAllowedOrigin, requestHost, verifyOrigin } from './middleware/origin.js';
 import { apiRouter } from './routes/index.js';
 
 export function createApp() {
@@ -25,10 +25,13 @@ export function createApp() {
     }),
   );
   app.use(
-    cors({
-      origin: (origin, cb) => cb(null, !origin || allowedOrigins.includes(origin.replace(/\/$/, ''))),
-      credentials: true,
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    cors((req, callback) => {
+      const origin = req.headers.origin?.replace(/\/$/, '');
+      callback(null, {
+        origin: isAllowedOrigin(origin, requestHost(req)),
+        credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+      });
     }),
   );
   app.use(compression());

@@ -1,4 +1,5 @@
 node_modules/
+.vercel/
 dist/
 .env
 .env.*
@@ -18,3 +19,4 @@ source-materials/
 /*.jpeg
 /*.jpg
 /*.zip
+.neon

@@ -1,6 +1,7 @@
 {
   "name": "uit-university",
   "private": true,
+  "type": "module",
   "version": "1.0.0",
   "description": "University of Integrated Thought (UIT) — official website and content management system",
   "workspaces": [
@@ -11,6 +12,7 @@
     "db": "npm run db:start -w server",
     "dev": "concurrently -n api,web -c blue,magenta \"npm run dev -w server\" \"npm run dev -w client\"",
     "build": "npm run build -w server && npm run build -w client",
+    "vercel-build": "npm run build -w server && npm run db:deploy -w server && npm run build -w client",
     "typecheck": "npm run typecheck -w server && npm run typecheck -w client",
     "test": "npm run test -w server",
     "db:migrate": "npm run db:migrate -w server",
@@ -22,5 +24,9 @@
   },
   "engines": {
     "node": ">=20.19"
+  },
+  "dependencies": {
+    "@neon/config": "^1.14.7",
+    "@neon/env": "^2.1.10"
   }
 }

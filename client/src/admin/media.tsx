@@ -11,7 +11,7 @@ import { Button, Field, Input, Modal, Pager, Select, Spinner, StringList, Textar
 
 export interface MediaItem extends Media {
   originalFilename: string;
-  provider: 'LOCAL' | 'CLOUDINARY';
+  provider: 'LOCAL' | 'CLOUDINARY' | 'NEON';
   fileSize: number;
   altText: string;
   description: string | null;
@@ -259,7 +259,7 @@ export function MediaDetails({ media, facets, onClose, onDeleted }: { media: Med
       <dl className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-slate-500">
         <dt>File</dt><dd className="truncate text-slate-700" title={media.originalFilename}>{media.originalFilename}</dd>
         <dt>Size</dt><dd className="text-slate-700">{fileSize(media.fileSize)}{media.width ? ` · ${media.width}×${media.height}` : ''}</dd>
-        <dt>Storage</dt><dd className="text-slate-700">{media.provider === 'CLOUDINARY' ? 'Cloudinary' : 'Local server'}</dd>
+        <dt>Storage</dt><dd className="text-slate-700">{media.provider === 'CLOUDINARY' ? 'Cloudinary' : media.provider === 'NEON' ? 'Neon Object Storage' : 'Local server'}</dd>
         <dt>Uploaded</dt><dd className="text-slate-700">{formatDateTime(media.createdAt)}{media.uploadedBy ? ` by ${media.uploadedBy.name}` : ''}</dd>
       </dl>
       <div className="flex flex-wrap gap-2">

@@ -1,4 +1,8 @@
-/** Thin fetch client. Auth lives in HttpOnly cookies; a 401 triggers one refresh attempt before failing. */
+/**
+ * Thin fetch client. Auth lives in HttpOnly cookies; a 401 triggers one refresh attempt before failing.
+ * On Vercel the browser calls the public `/api` rewrite. Leave `VITE_API_URL` empty so requests stay on this origin.
+ * A service binding is not used here: bindings exist only inside server functions, not in the built site.
+ */
 const BASE = (import.meta.env.VITE_API_URL ?? '').replace(/\/$/, '');
 
 export class ApiError extends Error {

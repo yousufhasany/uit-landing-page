@@ -3,7 +3,7 @@ import { LOCAL_VARIANT_WIDTHS } from '../lib/storage.js';
 
 interface MediaLike {
   id: string;
-  provider: 'CLOUDINARY' | 'LOCAL';
+  provider: 'CLOUDINARY' | 'LOCAL' | 'NEON';
   publicId: string;
   secureUrl: string;
   mimeType: string;
@@ -61,6 +61,15 @@ export function toMediaDTO(asset: MediaLike | null | undefined): MediaDTO | null
       url: cloudinaryTransform(url, 'f_auto,q_auto'),
       thumbUrl: cloudinaryTransform(url, 'f_auto,q_auto,c_fill,w_480,h_360'),
       srcSet: widths.map((w) => `${cloudinaryTransform(url, `f_auto,q_auto,c_limit,w_${w}`)} ${w}w`).join(', '),
+    };
+  }
+  if (asset.provider === 'NEON') {
+    const stem = url.replace(/\.[a-z0-9]+$/i, '');
+    const available = LOCAL_VARIANT_WIDTHS.filter((w, i) => i === 0 || !asset.width || asset.width > LOCAL_VARIANT_WIDTHS[i - 1]!);
+    return {
+      ...base,
+      thumbUrl: `${stem}-w480.webp`,
+      srcSet: available.map((w) => `${stem}-w${w}.webp ${Math.min(w, asset.width ?? w)}w`).join(', '),
     };
   }
   const stem = absolute(`/uploads/${asset.publicId.replace(/\.[a-z0-9]+$/i, '')}`);
