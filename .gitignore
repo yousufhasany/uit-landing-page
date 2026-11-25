@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+server/.pgdata/
+server/storage/uploads/
+server/src/generated/
+coverage/
+*.log
+.DS_Store
+source-materials/_extracted/
+
+# Original source documents and photographs. Curated copies used by the site live in server/prisma/seed-assets.
+source-materials/
+/*.pdf
+/*.docx
+/*.jpeg
+/*.jpg
+/*.zip

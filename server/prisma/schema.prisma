@@ -1,0 +1,827 @@
+// University of Integrated Thought — CMS database schema.
+// See docs/UIT_DATABASE_ARCHITECTURE.md for design rationale and deletion policies.
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ───────────────────────────── Enums ─────────────────────────────
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  SCHEDULED
+  ARCHIVED
+}
+
+enum ProgramStatus {
+  PROPOSED
+  UNDER_DEVELOPMENT
+  APPROVED
+  ACTIVE
+  ARCHIVED
+}
+
+enum LaunchPhase {
+  PHASE_I
+  PHASE_II
+  PHASE_III
+}
+
+enum DegreeLevel {
+  UNDERGRADUATE
+  POSTGRADUATE
+  POSTGRADUATE_DIPLOMA
+  DIPLOMA
+  CERTIFICATE
+  DOCTORAL
+}
+
+enum CampusCategory {
+  TEMPORARY_CAMPUS
+  FACILITY
+  ACTIVITY
+  PERMANENT_CAMPUS
+  CAMPUS_DEVELOPMENT
+  KNOWLEDGE_CITY
+  LOCATION
+}
+
+enum DevelopmentStatus {
+  CURRENT
+  IN_PROGRESS
+  PROPOSED
+  CONCEPT
+}
+
+enum ResearchItemType {
+  AREA
+  INITIATIVE
+  PROJECT
+  PUBLICATION
+  OPPORTUNITY
+  COLLABORATION
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  DOCUMENT
+}
+
+enum StorageProvider {
+  CLOUDINARY
+  LOCAL
+}
+
+enum AnnouncementType {
+  ADMISSION
+  IMPORTANT
+  GENERAL
+  EVENT
+  NOTICE
+}
+
+enum AnnouncementStyle {
+  INFO
+  HIGHLIGHT
+  URGENT
+}
+
+enum MenuLocation {
+  HEADER
+  FOOTER
+}
+
+enum LinkTarget {
+  SELF
+  BLANK
+}
+
+enum HomepageSectionType {
+  ANNOUNCEMENT
+  HERO
+  ABOUT
+  VISION
+  MISSION
+  PHILOSOPHY
+  STATISTICS
+  ACADEMICS
+  RESEARCH
+  CENTERS
+  NEWS
+  EVENTS
+  CAMPUS
+  GALLERY
+  PARTNERSHIPS
+  CTA
+  FOOTER
+}
+
+enum PageBlockType {
+  HEADING
+  RICH_TEXT
+  IMAGE
+  CTA
+  QUOTE
+  CARD_GRID
+  TIMELINE
+  STATS
+  DYNAMIC
+}
+
+enum ContactType {
+  ADDRESS
+  PHONE
+  EMAIL
+  WEBSITE
+  HOURS
+}
+
+enum RevisionEntity {
+  HOMEPAGE
+  PAGE
+  NEWS
+  EVENT
+  CENTER
+  PROGRAM
+}
+
+// ───────────────────────── Authentication ─────────────────────────
+
+model User {
+  id           String    @id @default(uuid()) @db.Uuid
+  email        String    @unique
+  name         String
+  passwordHash String
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  roles         UserRole[]
+  refreshTokens RefreshToken[]
+  activityLogs  ActivityLog[]
+  mediaAssets   MediaAsset[]      @relation("MediaUploader")
+  newsArticles  NewsArticle[]     @relation("NewsAuthor")
+  events        Event[]           @relation("EventAuthor")
+  pagesAuthored Page[]            @relation("PageAuthor")
+  pagesUpdated  Page[]            @relation("PageUpdater")
+  revisions     ContentRevision[]
+  homepageEdits HomepageSection[]
+  homepages     Homepage[]
+}
+
+model Role {
+  id          String   @id @default(uuid()) @db.Uuid
+  key         String   @unique
+  name        String
+  description String?
+  isSystem    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  users       UserRole[]
+  permissions RolePermission[]
+}
+
+model Permission {
+  id          String   @id @default(uuid()) @db.Uuid
+  key         String   @unique
+  description String
+  group       String
+  createdAt   DateTime @default(now())
+
+  roles RolePermission[]
+}
+
+model UserRole {
+  userId     String   @db.Uuid
+  roleId     String   @db.Uuid
+  assignedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role Role @relation(fields: [roleId], references: [id], onDelete: Restrict)
+
+  @@id([userId, roleId])
+  @@index([roleId])
+}
+
+model RolePermission {
+  roleId       String @db.Uuid
+  permissionId String @db.Uuid
+
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@index([permissionId])
+}
+
+model RefreshToken {
+  id         String    @id @default(uuid()) @db.Uuid
+  userId     String    @db.Uuid
+  tokenHash  String    @unique
+  expiresAt  DateTime
+  revokedAt  DateTime?
+  userAgent  String?
+  ip         String?
+  createdAt  DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// ──────────────────────────── Media ────────────────────────────
+
+model MediaFolder {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  slug      String   @unique
+  parentId  String?  @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  parent   MediaFolder?  @relation("FolderTree", fields: [parentId], references: [id], onDelete: Restrict)
+  children MediaFolder[] @relation("FolderTree")
+  assets   MediaAsset[]
+}
+
+model MediaAsset {
+  id               String          @id @default(uuid()) @db.Uuid
+  originalFilename String
+  provider         StorageProvider
+  publicId         String          @unique
+  url              String
+  secureUrl        String
+  mimeType         String
+  type             MediaType
+  fileSize         Int
+  width            Int?
+  height           Int?
+  duration         Float?
+  altText          String          @default("")
+  caption          String?
+  description      String?
+  category         String?
+  folderId         String?         @db.Uuid
+  uploadedById     String?         @db.Uuid
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  folder     MediaFolder?    @relation(fields: [folderId], references: [id], onDelete: SetNull)
+  uploadedBy User?           @relation("MediaUploader", fields: [uploadedById], references: [id], onDelete: SetNull)
+  tags       MediaAssetTag[]
+
+  newsArticles      NewsArticle[]
+  events            Event[]
+  pages             Page[]
+  faculties         Faculty[]
+  programs          AcademicProgram[]
+  centers           Center[]
+  campusItems       CampusItem[]
+  researchItems     ResearchItem[]
+  galleryItems      GalleryItem[]
+  galleryCovers     Gallery[]
+  @@index([type])
+  @@index([category])
+  @@index([folderId])
+  @@index([createdAt])
+}
+
+model MediaTag {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String   @unique
+  slug      String   @unique
+  createdAt DateTime @default(now())
+
+  assets MediaAssetTag[]
+}
+
+model MediaAssetTag {
+  assetId String @db.Uuid
+  tagId   String @db.Uuid
+
+  asset MediaAsset @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  tag   MediaTag   @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([assetId, tagId])
+  @@index([tagId])
+}
+
+// ─────────────────────────── Homepage ───────────────────────────
+
+model Homepage {
+  id            String    @id @default(uuid()) @db.Uuid
+  key           String    @unique
+  publishedAt   DateTime?
+  publishedById String?   @db.Uuid
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  publishedBy User?             @relation(fields: [publishedById], references: [id], onDelete: SetNull)
+  sections    HomepageSection[]
+}
+
+/// Each section keeps a draft copy and a published copy so editing never changes the live site until publish.
+model HomepageSection {
+  id               String              @id @default(uuid()) @db.Uuid
+  homepageId       String              @db.Uuid
+  type             HomepageSectionType
+  label            String
+  draftData        Json
+  draftVariant     String              @default("default")
+  draftOrder       Int
+  draftEnabled     Boolean             @default(true)
+  draftRemoved     Boolean             @default(false)
+  publishedData    Json?
+  publishedVariant String?
+  publishedOrder   Int?
+  publishedEnabled Boolean             @default(false)
+  hasDraftChanges  Boolean             @default(true)
+  updatedById      String?             @db.Uuid
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+
+  homepage  Homepage @relation(fields: [homepageId], references: [id], onDelete: Restrict)
+  updatedBy User?    @relation(fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([homepageId, draftOrder])
+  @@index([homepageId, publishedOrder])
+}
+
+// ──────────────────────────── Pages ────────────────────────────
+
+model Page {
+  id                String        @id @default(uuid()) @db.Uuid
+  title             String
+  slug              String        @unique
+  summary           String?
+  eyebrow           String?
+  featuredImageId   String?       @db.Uuid
+  template          String        @default("standard")
+  status            ContentStatus @default(DRAFT)
+  seoTitle          String?
+  seoDescription    String?
+  publishedAt       DateTime?
+  needsVerification Boolean       @default(false)
+  verificationNote  String?
+  /// Working copy of title, summary and blocks while a published page is being edited.
+  draftData         Json?
+  hasDraftChanges   Boolean       @default(false)
+  authorId          String?       @db.Uuid
+  updatedById       String?       @db.Uuid
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  featuredImage MediaAsset?    @relation(fields: [featuredImageId], references: [id], onDelete: SetNull)
+  author        User?          @relation("PageAuthor", fields: [authorId], references: [id], onDelete: SetNull)
+  updatedBy     User?          @relation("PageUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+  sections      PageSection[]
+  navItems      NavigationItem[]
+
+  @@index([status, publishedAt])
+}
+
+model PageSection {
+  id        String        @id @default(uuid()) @db.Uuid
+  pageId    String        @db.Uuid
+  type      PageBlockType
+  data      Json
+  order     Int
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  page Page @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@index([pageId, order])
+}
+
+model ContentRevision {
+  id          String         @id @default(uuid()) @db.Uuid
+  entityType  RevisionEntity
+  entityId    String         @db.Uuid
+  version     Int
+  snapshot    Json
+  note        String?
+  createdById String?        @db.Uuid
+  createdAt   DateTime       @default(now())
+
+  createdBy User? @relation(fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@unique([entityType, entityId, version])
+  @@index([entityType, entityId, createdAt])
+}
+
+// ──────────────────────────── News ────────────────────────────
+
+model NewsCategory {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  articles NewsArticle[]
+}
+
+model NewsTag {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String   @unique
+  slug      String   @unique
+  createdAt DateTime @default(now())
+
+  articles NewsArticleTag[]
+}
+
+model NewsArticle {
+  id              String        @id @default(uuid()) @db.Uuid
+  title           String
+  slug            String        @unique
+  summary         String
+  content         String
+  featuredImageId String?       @db.Uuid
+  imageAlt        String?
+  categoryId      String?       @db.Uuid
+  authorId        String?       @db.Uuid
+  status          ContentStatus @default(DRAFT)
+  isFeatured      Boolean       @default(false)
+  publishedAt     DateTime?
+  seoTitle        String?
+  seoDescription  String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  featuredImage MediaAsset?      @relation(fields: [featuredImageId], references: [id], onDelete: SetNull)
+  category      NewsCategory?    @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  author        User?            @relation("NewsAuthor", fields: [authorId], references: [id], onDelete: SetNull)
+  tags          NewsArticleTag[]
+
+  @@index([status, publishedAt])
+  @@index([categoryId])
+  @@index([isFeatured])
+}
+
+model NewsArticleTag {
+  articleId String @db.Uuid
+  tagId     String @db.Uuid
+
+  article NewsArticle @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  tag     NewsTag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, tagId])
+  @@index([tagId])
+}
+
+// ─────────────────────────── Events ───────────────────────────
+
+model EventCategory {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String   @unique
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  events Event[]
+}
+
+model Event {
+  id              String        @id @default(uuid()) @db.Uuid
+  title           String
+  slug            String        @unique
+  summary         String
+  description     String
+  featuredImageId String?       @db.Uuid
+  imageAlt        String?
+  categoryId      String?       @db.Uuid
+  startsAt        DateTime
+  endsAt          DateTime?
+  isAllDay        Boolean       @default(false)
+  venue           String?
+  registrationUrl String?
+  status          ContentStatus @default(DRAFT)
+  isFeatured      Boolean       @default(false)
+  publishedAt     DateTime?
+  seoTitle        String?
+  seoDescription  String?
+  authorId        String?       @db.Uuid
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  featuredImage MediaAsset?    @relation(fields: [featuredImageId], references: [id], onDelete: SetNull)
+  category      EventCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  author        User?          @relation("EventAuthor", fields: [authorId], references: [id], onDelete: SetNull)
+
+  @@index([status, startsAt])
+  @@index([categoryId])
+}
+
+// ────────────────────────── Academics ──────────────────────────
+
+model Faculty {
+  id                String        @id @default(uuid()) @db.Uuid
+  name              String        @unique
+  shortName         String?
+  slug              String        @unique
+  description       String?
+  imageId           String?       @db.Uuid
+  displayOrder      Int           @default(0)
+  status            ContentStatus @default(DRAFT)
+  needsVerification Boolean       @default(false)
+  verificationNote  String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  image       MediaAsset?       @relation(fields: [imageId], references: [id], onDelete: SetNull)
+  departments Department[]
+  programs    AcademicProgram[]
+
+  @@index([status, displayOrder])
+}
+
+model Department {
+  id           String        @id @default(uuid()) @db.Uuid
+  facultyId    String        @db.Uuid
+  name         String
+  slug         String        @unique
+  description  String?
+  displayOrder Int           @default(0)
+  status       ContentStatus @default(DRAFT)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  faculty  Faculty           @relation(fields: [facultyId], references: [id], onDelete: Restrict)
+  programs AcademicProgram[]
+
+  @@unique([facultyId, name])
+  @@index([facultyId, displayOrder])
+}
+
+model AcademicProgram {
+  id                String        @id @default(uuid()) @db.Uuid
+  name              String
+  slug              String        @unique
+  facultyId         String        @db.Uuid
+  departmentId      String?       @db.Uuid
+  degreeType        String
+  level             DegreeLevel
+  description       String?
+  overview          String?
+  duration          String?
+  credits           Int?
+  curriculum        String?
+  admissionInfo     String?
+  featuredImageId   String?       @db.Uuid
+  programStatus     ProgramStatus @default(PROPOSED)
+  launchPhase       LaunchPhase?
+  isVisible         Boolean       @default(true)
+  displayOrder      Int           @default(0)
+  seoTitle          String?
+  seoDescription    String?
+  needsVerification Boolean       @default(false)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  faculty       Faculty     @relation(fields: [facultyId], references: [id], onDelete: Restrict)
+  department    Department? @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  featuredImage MediaAsset? @relation(fields: [featuredImageId], references: [id], onDelete: SetNull)
+
+  @@index([facultyId])
+  @@index([departmentId])
+  @@index([programStatus, isVisible])
+}
+
+// ─────────────────────── Centers & Research ───────────────────────
+
+model Center {
+  id                String        @id @default(uuid()) @db.Uuid
+  name              String        @unique
+  acronym           String?
+  slug              String        @unique
+  tagline           String?
+  overview          String
+  objectives        String[]
+  description       String?
+  /// Ordered content sections: [{ title, body?, items?: string[] }]
+  sections          Json          @default("[]")
+  imageId           String?       @db.Uuid
+  ctaLabel          String?
+  ctaUrl            String?
+  displayOrder      Int           @default(0)
+  status            ContentStatus @default(DRAFT)
+  seoTitle          String?
+  seoDescription    String?
+  needsVerification Boolean       @default(false)
+  verificationNote  String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  image         MediaAsset?    @relation(fields: [imageId], references: [id], onDelete: SetNull)
+  researchItems ResearchItem[]
+
+  @@index([status, displayOrder])
+}
+
+model ResearchItem {
+  id           String           @id @default(uuid()) @db.Uuid
+  title        String
+  slug         String           @unique
+  type         ResearchItemType
+  summary      String
+  description  String?
+  phase        LaunchPhase?
+  imageId      String?          @db.Uuid
+  centerId     String?          @db.Uuid
+  externalUrl  String?
+  displayOrder Int              @default(0)
+  status       ContentStatus    @default(DRAFT)
+  publishedAt  DateTime?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  image  MediaAsset? @relation(fields: [imageId], references: [id], onDelete: SetNull)
+  center Center?     @relation(fields: [centerId], references: [id], onDelete: SetNull)
+
+  @@index([type, status, displayOrder])
+}
+
+// ──────────────────────────── Campus ────────────────────────────
+
+model CampusItem {
+  id                String            @id @default(uuid()) @db.Uuid
+  title             String
+  slug              String            @unique
+  description       String
+  imageId           String?           @db.Uuid
+  category          CampusCategory
+  developmentStatus DevelopmentStatus
+  displayOrder      Int               @default(0)
+  status            ContentStatus     @default(DRAFT)
+  needsVerification Boolean           @default(false)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  image MediaAsset? @relation(fields: [imageId], references: [id], onDelete: SetNull)
+
+  @@index([category, status, displayOrder])
+}
+
+// ─────────────────────────── Gallery ───────────────────────────
+
+model Gallery {
+  id           String        @id @default(uuid()) @db.Uuid
+  title        String
+  slug         String        @unique
+  description  String?
+  category     String?
+  coverImageId String?       @db.Uuid
+  displayOrder Int           @default(0)
+  status       ContentStatus @default(DRAFT)
+  publishedAt  DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  coverImage MediaAsset?   @relation(fields: [coverImageId], references: [id], onDelete: SetNull)
+  items      GalleryItem[]
+
+  @@index([status, displayOrder])
+}
+
+model GalleryItem {
+  id           String   @id @default(uuid()) @db.Uuid
+  galleryId    String   @db.Uuid
+  mediaId      String   @db.Uuid
+  caption      String?
+  altText      String?
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  gallery Gallery    @relation(fields: [galleryId], references: [id], onDelete: Cascade)
+  media   MediaAsset @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@unique([galleryId, mediaId])
+  @@index([galleryId, displayOrder])
+}
+
+// ────────────────────────── Navigation ──────────────────────────
+
+model NavigationMenu {
+  id        String       @id @default(uuid()) @db.Uuid
+  key       String       @unique
+  name      String
+  location  MenuLocation
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  items NavigationItem[]
+}
+
+model NavigationItem {
+  id           String     @id @default(uuid()) @db.Uuid
+  menuId       String     @db.Uuid
+  parentId     String?    @db.Uuid
+  label        String
+  url          String?
+  pageId       String?    @db.Uuid
+  description  String?
+  target       LinkTarget @default(SELF)
+  displayOrder Int        @default(0)
+  isVisible    Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  menu     NavigationMenu   @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  parent   NavigationItem?  @relation("NavTree", fields: [parentId], references: [id], onDelete: Cascade)
+  children NavigationItem[] @relation("NavTree")
+  page     Page?            @relation(fields: [pageId], references: [id], onDelete: SetNull)
+
+  @@index([menuId, parentId, displayOrder])
+}
+
+// ───────────────────────── Announcements ─────────────────────────
+
+model Announcement {
+  id              String            @id @default(uuid()) @db.Uuid
+  title           String
+  message         String
+  url             String?
+  linkLabel       String?
+  type            AnnouncementType  @default(GENERAL)
+  style           AnnouncementStyle @default(INFO)
+  startsAt        DateTime?
+  endsAt          DateTime?
+  priority        Int               @default(0)
+  isVisible       Boolean           @default(true)
+  autoHideExpired Boolean           @default(true)
+  status          ContentStatus     @default(DRAFT)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([status, isVisible, priority])
+}
+
+// ─────────────────────────── Settings ───────────────────────────
+
+model SiteSetting {
+  id          String   @id @default(uuid()) @db.Uuid
+  key         String   @unique
+  value       Json
+  group       String
+  isPublic    Boolean  @default(true)
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SocialLink {
+  id           String   @id @default(uuid()) @db.Uuid
+  platform     String
+  label        String
+  url          String
+  displayOrder Int      @default(0)
+  isVisible    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model ContactInformation {
+  id                String      @id @default(uuid()) @db.Uuid
+  label             String
+  type              ContactType
+  value             String
+  description       String?
+  displayOrder      Int         @default(0)
+  isVisible         Boolean     @default(true)
+  needsVerification Boolean     @default(false)
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+}
+
+// ──────────────────────────── Audit ────────────────────────────
+
+model ActivityLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String?  @db.Uuid
+  action     String
+  entityType String
+  entityId   String?
+  summary    String
+  metadata   Json?
+  ip         String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+  @@index([entityType, entityId])
+  @@index([userId])
+}

@@ -1,0 +1,720 @@
+[
+  {
+    "file": "uit-logo.png",
+    "width": 405,
+    "height": 540,
+    "source": "6. Temporary Campus of UIT.docx (cover)",
+    "title": "UIT official logo",
+    "alt": "University of Integrated Thought logo",
+    "category": "BRAND",
+    "folder": "Brand",
+    "tags": [
+      "logo",
+      "brand"
+    ]
+  },
+  {
+    "file": "uit-logo-on-teal.jpg",
+    "width": 405,
+    "height": 540,
+    "source": "6. Temporary Campus of UIT.docx (cover)",
+    "title": "UIT logo on brand teal",
+    "alt": "University of Integrated Thought logo",
+    "category": "BRAND",
+    "folder": "Brand",
+    "tags": [
+      "logo",
+      "brand"
+    ]
+  },
+  {
+    "file": "uit-logo-light-bg.png",
+    "width": 405,
+    "height": 540,
+    "source": "6. Temporary Campus of UIT.docx (cover)",
+    "title": "UIT logo for light backgrounds",
+    "alt": "University of Integrated Thought logo",
+    "category": "BRAND",
+    "folder": "Brand",
+    "tags": [
+      "logo",
+      "brand"
+    ]
+  },
+  {
+    "file": "campus-visualization-panorama.jpg",
+    "width": 2000,
+    "height": 526,
+    "source": "2. UIT - Design Plan.pdf (page 1)",
+    "title": "Architectural visualization of the proposed permanent campus",
+    "alt": "Architectural rendering of the proposed UIT permanent campus with academic buildings, a central mosque and a canal-side road",
+    "caption": "Architectural visualization of the proposed permanent campus at Rohila, Rupganj. Not yet constructed.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Permanent Campus",
+    "tags": [
+      "proposed",
+      "masterplan",
+      "visualization"
+    ]
+  },
+  {
+    "file": "campus-visualization-aerial.jpg",
+    "width": 2000,
+    "height": 541,
+    "source": "2. UIT - Design Plan.pdf (page 2)",
+    "title": "Aerial visualization of the proposed Phase 1 campus",
+    "alt": "Aerial architectural rendering of the proposed UIT Phase 1 campus buildings beside a canal",
+    "caption": "Proposed Phase 1 campus, architectural visualization from the UIT Design Plan.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Permanent Campus",
+    "tags": [
+      "proposed",
+      "visualization"
+    ]
+  },
+  {
+    "file": "campus-visualization-canal.jpg",
+    "width": 778,
+    "height": 643,
+    "source": "2. UIT - Design Plan.pdf (page 2)",
+    "title": "Visualization of academic buildings across the canal",
+    "alt": "Architectural rendering of proposed UIT academic buildings seen across the canal",
+    "caption": "Proposed academic buildings, architectural visualization from the UIT Design Plan.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Permanent Campus",
+    "tags": [
+      "proposed",
+      "visualization"
+    ]
+  },
+  {
+    "file": "phase-1-layout-plan.jpg",
+    "width": 1757,
+    "height": 1089,
+    "source": "2. UIT - Design Plan.pdf (page 4)",
+    "title": "Layout plan of Phase 1 (15 bigha)",
+    "alt": "Colour layout plan of the proposed UIT Phase 1 campus showing academic, residential, mosque and convention zones",
+    "caption": "Layout plan of the proposed Phase 1 campus (5 acres / 15 bigha).",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Permanent Campus",
+    "tags": [
+      "proposed",
+      "masterplan",
+      "plan"
+    ]
+  },
+  {
+    "file": "three-phase-boundary-map.jpg",
+    "width": 879,
+    "height": 750,
+    "source": "2. UIT - Design Plan.pdf (page 3)",
+    "title": "Master plan boundary map with three-phase expansion",
+    "alt": "Satellite map with outlined boundaries for UIT campus phases 1, 2 and 3",
+    "caption": "Boundary map of the three-phase campus expansion plan.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Permanent Campus",
+    "tags": [
+      "proposed",
+      "masterplan"
+    ]
+  },
+  {
+    "file": "campus-location-map.jpg",
+    "width": 1739,
+    "height": 1186,
+    "source": "2. UIT - Design Plan.pdf (page 3)",
+    "title": "UIT campus location map",
+    "alt": "Map showing the proposed UIT project area near Purbachal and the Shitalakshya river",
+    "caption": "Project area location map, Rohila, Rupganj, Narayanganj.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Permanent Campus",
+    "tags": [
+      "location",
+      "map"
+    ]
+  },
+  {
+    "file": "knowledge-city-master-plan.jpg",
+    "width": 2000,
+    "height": 1414,
+    "source": "9.1. UIT_R15-15032026-150BIGHA.pdf (page 1)",
+    "title": "Knowledge City master plan (Phases II and III)",
+    "alt": "Master plan drawing of the proposed Knowledge City across Phases II and III",
+    "caption": "Proposed Knowledge City master plan, Phases II and III (150 bigha).",
+    "category": "KNOWLEDGE_CITY",
+    "folder": "Knowledge City",
+    "tags": [
+      "proposed",
+      "masterplan",
+      "knowledge-city"
+    ]
+  },
+  {
+    "file": "phase-1-3d-layout.jpg",
+    "width": 1145,
+    "height": 722,
+    "source": "source-materials/_extracted/doc-images/3-1-uit-concept-paper-v-1-1-p13-09.jpeg",
+    "title": "3D layout of the proposed Phase 1 campus",
+    "alt": "Three-dimensional layout of the proposed UIT Phase 1 campus",
+    "caption": "3D layout of the proposed Phase 1 campus from the UIT Concept Paper.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Permanent Campus",
+    "tags": [
+      "proposed",
+      "masterplan"
+    ]
+  },
+  {
+    "file": "temporary-campus-entrance.jpg",
+    "width": 1280,
+    "height": 960,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-37.jpeg",
+    "title": "Entrance of the UIT temporary campus",
+    "alt": "Entrance of the seven-storey UIT temporary campus building at Duara, Daudpur, Rupganj",
+    "caption": "Entrance of the UIT temporary campus, temporary campus, Rupganj.",
+    "category": "TEMPORARY_CAMPUS",
+    "folder": "Temporary Campus",
+    "tags": [
+      "temporary-campus"
+    ]
+  },
+  {
+    "file": "temporary-campus-building.jpg",
+    "width": 668,
+    "height": 911,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-38.jpeg",
+    "title": "UIT temporary campus building",
+    "alt": "Seven-storey building serving as the UIT temporary campus",
+    "caption": "UIT temporary campus building, temporary campus, Rupganj.",
+    "category": "TEMPORARY_CAMPUS",
+    "folder": "Temporary Campus",
+    "tags": [
+      "temporary-campus"
+    ]
+  },
+  {
+    "file": "temporary-campus-corridor.jpg",
+    "width": 1280,
+    "height": 960,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-39.jpeg",
+    "title": "Temporary campus reception corridor",
+    "alt": "Corridor inside the UIT temporary campus with information panels",
+    "caption": "Temporary campus reception corridor, temporary campus, Rupganj.",
+    "category": "TEMPORARY_CAMPUS",
+    "folder": "Temporary Campus",
+    "tags": [
+      "temporary-campus"
+    ]
+  },
+  {
+    "file": "conference-hall-signage.jpg",
+    "width": 939,
+    "height": 1003,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-29.jpeg",
+    "title": "Conference Hall of UIT",
+    "alt": "Signage for the Conference Hall of UIT at the temporary campus",
+    "caption": "Conference Hall of UIT, temporary campus, Rupganj.",
+    "category": "TEMPORARY_CAMPUS",
+    "folder": "Temporary Campus",
+    "tags": [
+      "temporary-campus"
+    ]
+  },
+  {
+    "file": "conference-hall.jpg",
+    "width": 618,
+    "height": 463,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-45.jpeg",
+    "title": "Conference hall",
+    "alt": "Conference hall with a long table at the UIT temporary campus",
+    "caption": "Conference hall, temporary campus, Rupganj.",
+    "category": "TEMPORARY_CAMPUS",
+    "folder": "Temporary Campus",
+    "tags": [
+      "temporary-campus"
+    ]
+  },
+  {
+    "file": "meeting-room.jpg",
+    "width": 841,
+    "height": 631,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-28.jpeg",
+    "title": "Meeting room",
+    "alt": "Meeting room at the UIT temporary campus",
+    "caption": "Meeting room, temporary campus, Rupganj.",
+    "category": "TEMPORARY_CAMPUS",
+    "folder": "Temporary Campus",
+    "tags": [
+      "temporary-campus"
+    ]
+  },
+  {
+    "file": "vice-chancellor-office.jpg",
+    "width": 609,
+    "height": 696,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-35.jpeg",
+    "title": "Vice-Chancellor office",
+    "alt": "Vice-Chancellor office at the UIT temporary campus",
+    "caption": "Vice-Chancellor office, temporary campus, Rupganj.",
+    "category": "TEMPORARY_CAMPUS",
+    "folder": "Temporary Campus",
+    "tags": [
+      "temporary-campus"
+    ]
+  },
+  {
+    "file": "schools-signage.jpg",
+    "width": 646,
+    "height": 402,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-31.jpeg",
+    "title": "Schools of UIT signage",
+    "alt": "Signage for UIT schools at the temporary campus",
+    "caption": "Schools of UIT signage, temporary campus, Rupganj.",
+    "category": "TEMPORARY_CAMPUS",
+    "folder": "Temporary Campus",
+    "tags": [
+      "temporary-campus"
+    ]
+  },
+  {
+    "file": "shss-signage.jpg",
+    "width": 774,
+    "height": 579,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-44.jpeg",
+    "title": "School of Humanities and Social Sciences",
+    "alt": "Signage for the School of Humanities and Social Sciences and its departments",
+    "caption": "School of Humanities and Social Sciences, temporary campus, Rupganj.",
+    "category": "TEMPORARY_CAMPUS",
+    "folder": "Temporary Campus",
+    "tags": [
+      "temporary-campus"
+    ]
+  },
+  {
+    "file": "centers-signage.jpg",
+    "width": 325,
+    "height": 542,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-40.jpeg",
+    "title": "Center offices",
+    "alt": "Office doors for the Center for Co-curricular and Community Engagement and the School of Foundational Studies",
+    "caption": "Center offices, temporary campus, Rupganj.",
+    "category": "TEMPORARY_CAMPUS",
+    "folder": "Temporary Campus",
+    "tags": [
+      "temporary-campus"
+    ]
+  },
+  {
+    "file": "uit-library.jpg",
+    "width": 1522,
+    "height": 1033,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-52.jpeg",
+    "title": "UIT Library",
+    "alt": "Bookshelves in the UIT Library at the temporary campus",
+    "caption": "UIT Library, temporary campus, Rupganj.",
+    "category": "TEMPORARY_CAMPUS",
+    "folder": "Temporary Campus",
+    "tags": [
+      "temporary-campus"
+    ]
+  },
+  {
+    "file": "uit-library-shelves.jpg",
+    "width": 495,
+    "height": 660,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-43.jpeg",
+    "title": "UIT Library collection",
+    "alt": "Shelves of academic books in the UIT Library",
+    "caption": "UIT Library collection, temporary campus, Rupganj.",
+    "category": "TEMPORARY_CAMPUS",
+    "folder": "Temporary Campus",
+    "tags": [
+      "temporary-campus"
+    ]
+  },
+  {
+    "file": "site-office.jpg",
+    "width": 731,
+    "height": 566,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-32.jpeg",
+    "title": "UIT site office",
+    "alt": "UIT site office at the permanent campus land",
+    "caption": "UIT site office, temporary campus, Rupganj.",
+    "category": "TEMPORARY_CAMPUS",
+    "folder": "Temporary Campus",
+    "tags": [
+      "temporary-campus"
+    ]
+  },
+  {
+    "file": "knowledge-city-banner-group.jpg",
+    "width": 1500,
+    "height": 1000,
+    "source": "source-materials/_extracted/zip/Site Office and Permanent Campus/12.jpg",
+    "title": "Gathering at the UIT Knowledge City site",
+    "alt": "Group standing in front of a University of Integrated Thoughts Knowledge City banner on the campus land",
+    "caption": "Gathering at the UIT Knowledge City site.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Site Office and Permanent Campus",
+    "tags": [
+      "permanent-campus",
+      "site-visit"
+    ]
+  },
+  {
+    "file": "land-signboard-group.jpg",
+    "width": 1600,
+    "height": 1066,
+    "source": "source-materials/_extracted/zip/Site Office and Permanent Campus/04.jpg",
+    "title": "Visitors at the UIT project land",
+    "alt": "Visitors standing at the University Project of BIIT signboard on the acquired land",
+    "caption": "Visitors at the UIT project land.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Site Office and Permanent Campus",
+    "tags": [
+      "permanent-campus",
+      "site-visit"
+    ]
+  },
+  {
+    "file": "land-signboard-field.jpg",
+    "width": 1500,
+    "height": 1125,
+    "source": "source-materials/_extracted/zip/Site Office and Permanent Campus/09.jpg",
+    "title": "UIT project land signboard",
+    "alt": "Group at the University Project signboard on open land",
+    "caption": "UIT project land signboard.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Site Office and Permanent Campus",
+    "tags": [
+      "permanent-campus",
+      "site-visit"
+    ]
+  },
+  {
+    "file": "site-plan-review.jpg",
+    "width": 1500,
+    "height": 999,
+    "source": "source-materials/_extracted/zip/Site Office and Permanent Campus/10..jpg",
+    "title": "Reviewing the site plan on location",
+    "alt": "Visitors reviewing a printed site plan on the campus land",
+    "caption": "Reviewing the site plan on location.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Site Office and Permanent Campus",
+    "tags": [
+      "permanent-campus",
+      "site-visit"
+    ]
+  },
+  {
+    "file": "community-gathering-site.jpg",
+    "width": 1500,
+    "height": 1000,
+    "source": "source-materials/_extracted/zip/Site Office and Permanent Campus/13.jpg",
+    "title": "Community gathering at the campus site",
+    "alt": "Large group of local community members and visitors at the campus site",
+    "caption": "Community gathering at the campus site.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Site Office and Permanent Campus",
+    "tags": [
+      "permanent-campus",
+      "site-visit"
+    ]
+  },
+  {
+    "file": "site-visit-group.jpg",
+    "width": 1500,
+    "height": 1000,
+    "source": "source-materials/_extracted/zip/Site Office and Permanent Campus/IMG_4288.jpg",
+    "title": "Site visit group",
+    "alt": "Group photograph during a site visit to the UIT campus land",
+    "caption": "Site visit group.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Site Office and Permanent Campus",
+    "tags": [
+      "permanent-campus",
+      "site-visit"
+    ]
+  },
+  {
+    "file": "site-map-review.jpg",
+    "width": 1280,
+    "height": 960,
+    "source": "source-materials/_extracted/zip/Site Office and Permanent Campus/01.tif",
+    "title": "Field review of the project map",
+    "alt": "Visitors examining the UIT project map during a field visit",
+    "caption": "Field review of the project map.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Site Office and Permanent Campus",
+    "tags": [
+      "permanent-campus",
+      "site-visit"
+    ]
+  },
+  {
+    "file": "land-visit-panorama.jpg",
+    "width": 2000,
+    "height": 943,
+    "source": "source-materials/_extracted/zip/Site Office and Permanent Campus/Copy of Milon_01.tif",
+    "title": "Visit to the campus land",
+    "alt": "Visitors at the University Project signboard on the campus land",
+    "caption": "Visit to the campus land.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Site Office and Permanent Campus",
+    "tags": [
+      "permanent-campus",
+      "site-visit"
+    ]
+  },
+  {
+    "file": "site-visit-trio.jpg",
+    "width": 1024,
+    "height": 768,
+    "source": "source-materials/_extracted/zip/Site Office and Permanent Campus/WhatsApp Image 2024-05-04 at 12.58.13 PM (1) (1).jpeg",
+    "title": "Site visit, May 2024",
+    "alt": "Three visitors standing on the UIT campus land",
+    "caption": "Site visit, May 2024.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Site Office and Permanent Campus",
+    "tags": [
+      "permanent-campus",
+      "site-visit"
+    ]
+  },
+  {
+    "file": "consultation-meeting-2024.jpg",
+    "width": 2000,
+    "height": 1500,
+    "source": "source-materials/_extracted/zip/Site Office and Permanent Campus/IMG_20240115_130952.jpg",
+    "title": "Consultation meeting, January 2024",
+    "alt": "Participants holding a plaque at a UIT consultation meeting",
+    "caption": "Consultation meeting, January 2024.",
+    "category": "CAMPUS_DEVELOPMENT",
+    "folder": "Site Office and Permanent Campus",
+    "tags": [
+      "permanent-campus",
+      "site-visit"
+    ]
+  },
+  {
+    "file": "education-valley-banner.jpg",
+    "width": 1392,
+    "height": 1058,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-27.jpeg",
+    "title": "Knowledge City / Education Valley site",
+    "alt": "Banner reading University of Integrated Thought - An Education Valley of BIIT Trust on the campus land",
+    "caption": "Site of the proposed Knowledge City (Education Valley), Rohila, Rupganj.",
+    "category": "KNOWLEDGE_CITY",
+    "folder": "Knowledge City",
+    "tags": [
+      "knowledge-city",
+      "permanent-campus"
+    ]
+  },
+  {
+    "file": "ugc-inspection-group.jpg",
+    "width": 1500,
+    "height": 1000,
+    "source": "IMG-20260209-WA0039.jpg",
+    "title": "UGC inspection at UIT, 9 February 2026",
+    "alt": "UGC inspection committee and UIT representatives in front of the temporary campus",
+    "caption": "UGC inspection at UIT, 9 February 2026.",
+    "category": "REGULATORY",
+    "folder": "Institutional Activities",
+    "tags": [
+      "ugc",
+      "milestone"
+    ]
+  },
+  {
+    "file": "ugc-inspection-group-2.jpg",
+    "width": 1500,
+    "height": 1000,
+    "source": "IMG-20260209-WA0038.jpg",
+    "title": "UGC inspection at UIT, 9 February 2026",
+    "alt": "Group photograph at the UIT temporary campus during the UGC inspection",
+    "caption": "UGC inspection at UIT, 9 February 2026.",
+    "category": "REGULATORY",
+    "folder": "Institutional Activities",
+    "tags": [
+      "ugc",
+      "milestone"
+    ]
+  },
+  {
+    "file": "ugc-inspection-group-3.jpg",
+    "width": 1500,
+    "height": 1000,
+    "source": "IMG-20260209-WA0040.jpg",
+    "title": "UGC inspection at UIT, 9 February 2026",
+    "alt": "Group photograph at the UIT temporary campus entrance during the UGC inspection",
+    "caption": "UGC inspection at UIT, 9 February 2026.",
+    "category": "REGULATORY",
+    "folder": "Institutional Activities",
+    "tags": [
+      "ugc",
+      "milestone"
+    ]
+  },
+  {
+    "file": "ugc-inspection-meeting.jpg",
+    "width": 1500,
+    "height": 1000,
+    "source": "UGC Conducts Formal Inspection at UIT - 3.jpeg",
+    "title": "UGC inspection meeting",
+    "alt": "UGC committee members and UIT leadership in the meeting room during the inspection",
+    "caption": "UGC inspection meeting.",
+    "category": "REGULATORY",
+    "folder": "Institutional Activities",
+    "tags": [
+      "ugc",
+      "milestone"
+    ]
+  },
+  {
+    "file": "board-of-trustees-2nd-meeting.jpg",
+    "width": 1280,
+    "height": 720,
+    "source": "2nd Meeting of the UIT Board of Trustees (1).jpeg",
+    "title": "2nd Meeting of the UIT Board of Trustees",
+    "alt": "Members of the UIT Board of Trustees seated at the second board meeting",
+    "caption": "2nd Meeting of the UIT Board of Trustees.",
+    "category": "GOVERNANCE",
+    "folder": "Institutional Activities",
+    "tags": [
+      "board-of-trustees"
+    ]
+  },
+  {
+    "file": "board-of-trustees-2nd-meeting-group.jpg",
+    "width": 1280,
+    "height": 720,
+    "source": "2nd Meeting of the UIT Board of Trustees (2).jpeg",
+    "title": "2nd Meeting of the UIT Board of Trustees",
+    "alt": "Group photograph of UIT trustees at the second board meeting",
+    "caption": "2nd Meeting of the UIT Board of Trustees.",
+    "category": "GOVERNANCE",
+    "folder": "Institutional Activities",
+    "tags": [
+      "board-of-trustees"
+    ]
+  },
+  {
+    "file": "malaysia-high-commission-visit.jpg",
+    "width": 1600,
+    "height": 1200,
+    "source": "A delegation led by Professor Dr. M. Abdul Aziz paid a courtesy visit to the High Commission of Malaysia in Dhaka -4.jpeg",
+    "title": "Courtesy visit to the High Commission of Malaysia",
+    "alt": "Professor Dr. M. Abdul Aziz in discussion at the High Commission of Malaysia in Dhaka",
+    "caption": "Courtesy visit to the High Commission of Malaysia.",
+    "category": "DELEGATION",
+    "folder": "Institutional Activities",
+    "tags": [
+      "malaysia",
+      "delegation"
+    ]
+  },
+  {
+    "file": "malaysia-high-commission-meeting.jpg",
+    "width": 1080,
+    "height": 608,
+    "source": "A delegation led by Professor Dr. M. Abdul Aziz paid a courtesy visit to the High Commission of Malaysia in Dhaka -3.jpeg",
+    "title": "Meeting at the High Commission of Malaysia",
+    "alt": "UIT delegation meeting with the High Commissioner of Malaysia",
+    "caption": "Meeting at the High Commission of Malaysia.",
+    "category": "DELEGATION",
+    "folder": "Institutional Activities",
+    "tags": [
+      "malaysia",
+      "delegation"
+    ]
+  },
+  {
+    "file": "malaysia-high-commission-group.jpg",
+    "width": 1080,
+    "height": 608,
+    "source": "A delegation led by Professor Dr. M. Abdul Aziz paid a courtesy visit to the High Commission of Malaysia in Dhaka -5.jpeg",
+    "title": "UIT delegation at the High Commission of Malaysia",
+    "alt": "UIT delegation group photograph at the High Commission of Malaysia in Dhaka",
+    "caption": "UIT delegation at the High Commission of Malaysia.",
+    "category": "DELEGATION",
+    "folder": "Institutional Activities",
+    "tags": [
+      "malaysia",
+      "delegation"
+    ]
+  },
+  {
+    "file": "education-minister-meeting.jpg",
+    "width": 1600,
+    "height": 1200,
+    "source": "Meeting with the Honorable Education Minister of Bangladesh (1).jpeg",
+    "title": "Meeting with the Honorable Education Minister",
+    "alt": "UIT Trust Chairman presenting to the Honorable Education Minister of Bangladesh",
+    "caption": "Meeting with the Honorable Education Minister.",
+    "category": "GOVERNANCE",
+    "folder": "Institutional Activities",
+    "tags": [
+      "ministry-of-education"
+    ]
+  },
+  {
+    "file": "dhaka-university-vc-meeting.jpg",
+    "width": 1600,
+    "height": 1200,
+    "source": "Meeting with the Vice-Chancellor of Dhaka University.jpeg",
+    "title": "Meeting with the Vice-Chancellor of Dhaka University",
+    "alt": "UIT Trust delegation meeting the Vice-Chancellor of the University of Dhaka",
+    "caption": "Meeting with the Vice-Chancellor of Dhaka University.",
+    "category": "DELEGATION",
+    "folder": "Institutional Activities",
+    "tags": [
+      "university-of-dhaka"
+    ]
+  },
+  {
+    "file": "board-of-trustees-first-meeting.jpg",
+    "width": 595,
+    "height": 392,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-14.jpeg",
+    "title": "First meeting of the UIT Board of Trustees, 17 October 2025",
+    "alt": "UIT Trust banner and trustees at the first Board of Trustees meeting",
+    "caption": "First Board of Trustees meeting, Hotel Lakeshore Grand, Dhaka, 17 October 2025.",
+    "category": "GOVERNANCE",
+    "folder": "Institutional Activities",
+    "tags": [
+      "board-of-trustees",
+      "milestone"
+    ]
+  },
+  {
+    "file": "ministry-of-education-submission.jpg",
+    "width": 546,
+    "height": 608,
+    "source": "source-materials/_extracted/doc-images/6-temporary-campus-of-uit-18.png",
+    "title": "Application submitted to the Ministry of Education, 9 December 2025",
+    "alt": "UIT representatives at the Ministry of Education during the application submission",
+    "caption": "Formal submission to the Ministry of Education, 9 December 2025.",
+    "category": "REGULATORY",
+    "folder": "Institutional Activities",
+    "tags": [
+      "ministry-of-education",
+      "milestone"
+    ]
+  },
+  {
+    "file": "uniw-social-business-summit.jpg",
+    "width": 700,
+    "height": 467,
+    "source": "source-materials/_extracted/doc-images/8-visit-of-uniw-delegations-in-bangladesh-p03-01.jpeg",
+    "title": "International Social Business Summit, 5 July 2025",
+    "alt": "Guests seated on stage at the International Social Business Summit in Dhaka",
+    "caption": "International Social Business Summit organized by UNIW with BIIT and SAWAB Foundation, Dhaka, 5 July 2025.",
+    "category": "DELEGATION",
+    "folder": "Institutional Activities",
+    "tags": [
+      "uniw",
+      "delegation"
+    ]
+  }
+]
