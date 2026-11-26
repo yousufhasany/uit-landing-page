@@ -363,7 +363,7 @@ export const CONTACTS = [
   { label: 'Permanent campus (proposed)', type: 'ADDRESS', value: 'Rohila Mouza, Daudpur, Rupganj, Narayanganj, Bangladesh', description: null, needsVerification: false },
   { label: 'Telephone', type: 'PHONE', value: '+88 02 8917509', description: 'BIIT Trust', needsVerification: true },
   { label: 'Mobile', type: 'PHONE', value: '+880 1712-757556', description: 'BIIT Trust', needsVerification: true },
-  { label: 'Email', type: 'EMAIL', value: 'trustbiit07@gmail.com', description: 'BIIT Trust', needsVerification: true },
+  { label: 'Email', type: 'EMAIL', value: 'uit.edu.bd@gmail.com', description: 'UIT', needsVerification: false },
 ];
 
 export const SETTINGS = {

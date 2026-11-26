@@ -16,7 +16,7 @@ export function contactHref(type: string, value: string) {
 export function Footer({ site }: { site: SiteData }) {
   const columns = ['footer-explore', 'footer-resources'].map((k) => site.menus[k]).filter(Boolean);
   const legal = site.menus['footer-legal']?.items ?? [];
-  const contacts = site.contacts.slice(0, 4);
+  const contacts = [...site.contacts.filter((c) => c.type !== 'EMAIL').slice(0, 4), ...site.contacts.filter((c) => c.type === 'EMAIL')];
   const year = new Date().getFullYear();
 
   return (

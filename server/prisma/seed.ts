@@ -127,7 +127,11 @@ async function seedSettings() {
   }
   for (const [i, c] of CONTACTS.entries()) {
     const exists = await prisma.contactInformation.findFirst({ where: { label: c.label } });
-    if (!exists) await prisma.contactInformation.create({ data: { ...c, type: c.type as never, displayOrder: i } });
+    if (!exists) {
+      await prisma.contactInformation.create({ data: { ...c, type: c.type as never, displayOrder: i } });
+    } else if (c.type === 'EMAIL' && exists.value !== c.value) {
+      await prisma.contactInformation.update({ where: { id: exists.id }, data: { value: c.value, description: c.description, needsVerification: c.needsVerification } });
+    }
   }
   const approval = ARTICLES.find((a) => a.featured)!;
   if (!(await prisma.announcement.count())) {
