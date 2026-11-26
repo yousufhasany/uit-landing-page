@@ -28,7 +28,7 @@ export const BLOCK_DEFAULTS: Record<string, Record<string, unknown>> = {
   IMAGE: { mediaId: null, caption: '', size: 'wide' },
   CTA: { title: '', text: '', buttons: [] },
   QUOTE: { text: '', attribution: '' },
-  CARD_GRID: { title: '', intro: '', columns: 3, cards: [] },
+  CARD_GRID: { title: '', intro: '', columns: 3, variant: 'standard', cards: [] },
   TIMELINE: { title: '', items: [] },
   STATS: { items: [], sourceNote: '' },
   DYNAMIC: { module: 'news', title: '', intro: '', category: '', limit: 12 },
@@ -59,12 +59,13 @@ export const BLOCK_FIELDS: Record<string, FieldDef[]> = {
     { key: 'title', label: 'Title', kind: 'text', max: 200 },
     { key: 'intro', label: 'Intro', kind: 'textarea', rows: 2, max: 800 },
     { key: 'columns', label: 'Columns', kind: 'select', numeric: true, options: [{ value: '2', label: '2 columns' }, { value: '3', label: '3 columns' }, { value: '4', label: '4 columns' }] },
+    { key: 'variant', label: 'Layout', kind: 'select', options: [{ value: 'standard', label: 'Standard cards' }, { value: 'people', label: 'People' }] },
     {
       key: 'cards', label: 'Cards', kind: 'list', max: 24, itemLabel: 'Card', titleKey: 'title',
       fields: [
         { key: 'title', label: 'Title', kind: 'text', max: 160 },
         { key: 'text', label: 'Text', kind: 'textarea', rows: 3, max: 1200 },
-        { key: 'badge', label: 'Badge', kind: 'text', max: 40, hint: 'e.g. Proposed, Operational' },
+        { key: 'badge', label: 'Badge', kind: 'text', max: 40, hint: 'A short label, such as Chairman or Vice-Chancellor (Designated).' },
         { key: 'url', label: 'Link', kind: 'url', placeholder: '/campus or https://…' },
         { key: 'imageId', label: 'Image', kind: 'image' },
       ],

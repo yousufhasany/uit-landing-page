@@ -303,7 +303,7 @@ export const MENUS: { key: string; name: string; location: 'HEADER' | 'FOOTER'; 
         { label: 'Vision & Mission', url: '/about/vision-mission', description: 'What UIT aims to become' },
         { label: 'Philosophy', url: '/about/philosophy', description: 'The integrated education model' },
         { label: 'History & Milestones', url: '/about/history', description: 'The road to establishment' },
-        { label: 'Leadership', url: '/about/leadership', description: 'Board and academic management', visible: false },
+        { label: 'Leadership', url: '/about/leadership', description: 'Board, advisers and academic officers' },
       ] },
       { label: 'Academics', url: '/academics', children: [
         { label: 'Overview', url: '/academics', description: 'The Academic Master Plan' },
@@ -336,7 +336,7 @@ export const MENUS: { key: string; name: string; location: 'HEADER' | 'FOOTER'; 
     name: 'Footer: Explore',
     location: 'FOOTER',
     items: [
-      { label: 'About UIT', url: '/about' }, { label: 'Vision & Mission', url: '/about/vision-mission' }, { label: 'Academics', url: '/academics' },
+      { label: 'About UIT', url: '/about' }, { label: 'Vision & Mission', url: '/about/vision-mission' }, { label: 'Leadership', url: '/about/leadership' }, { label: 'Academics', url: '/academics' },
       { label: 'Research', url: '/research' }, { label: 'Centers', url: '/centers' }, { label: 'Campus', url: '/campus' },
     ],
   },

@@ -716,5 +716,184 @@
       "uniw",
       "delegation"
     ]
+  },
+  {
+    "file": "vc-fazli-ilahi.jpg",
+    "width": 413,
+    "height": 591,
+    "source": "VC and Pro-VC Photo/1. Vice-Chancellor (Designated).jpeg",
+    "title": "Prof. Dr. Fazli Ilahi",
+    "alt": "Portrait of Prof. Dr. Fazli Ilahi, designated Vice-Chancellor of UIT",
+    "caption": "Prof. Dr. Fazli Ilahi, Vice-Chancellor (Designated).",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "vice-chancellor"]
+  },
+  {
+    "file": "pro-vc-mozammel-hoq.jpg",
+    "width": 640,
+    "height": 640,
+    "source": "VC and Pro-VC Photo/2. Pro-Vice-Chancellor (Designated).jpg",
+    "title": "Prof. Dr. Md. Mozammel Hoq",
+    "alt": "Portrait of Prof. Dr. Md. Mozammel Hoq, designated Pro-Vice-Chancellor of UIT",
+    "caption": "Prof. Dr. Md. Mozammel Hoq, Pro-Vice-Chancellor (Designated).",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "pro-vice-chancellor"]
+  },
+  {
+    "file": "bot-abdul-aziz.jpg",
+    "width": 472,
+    "height": 591,
+    "source": "BoT Members Photo/1. Abdul Aziz.jpeg",
+    "title": "Prof. Dr. M. Abdul Aziz",
+    "alt": "Portrait of Prof. Dr. M. Abdul Aziz, Chairman of the UIT Board of Trustees",
+    "caption": "Prof. Dr. M. Abdul Aziz, Chairman of the Board of Trustees.",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
+  },
+  {
+    "file": "bot-abul-kalam.jpg",
+    "width": 359,
+    "height": 495,
+    "source": "BoT Members Photo/2. Abul Kalam.png",
+    "title": "Alhaj Mohammad Abul Kalam",
+    "alt": "Portrait of Alhaj Mohammad Abul Kalam, member of the UIT Board of Trustees",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
+  },
+  {
+    "file": "bot-farid-ahmed.jpg",
+    "width": 643,
+    "height": 643,
+    "source": "BoT Members Photo/3. Dr Farid Ahmed.jpeg",
+    "title": "Prof. Dr. Farid Ahmed",
+    "alt": "Portrait of Prof. Dr. Farid Ahmed, member of the UIT Board of Trustees",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
+  },
+  {
+    "file": "bot-mostafiz-chowdhury.jpg",
+    "width": 224,
+    "height": 335,
+    "source": "BoT Members Photo/4. Prof. Mostafiz Chy.png",
+    "title": "Prof. Dr. Mostafiz Chowdhury",
+    "alt": "Portrait of Prof. Dr. Mostafiz Chowdhury, member of the UIT Board of Trustees",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
+  },
+  {
+    "file": "bot-tauhid-choudhury.jpg",
+    "width": 1071,
+    "height": 1428,
+    "source": "BoT Members Photo/5. Tauhid Chy.jpeg",
+    "title": "Engr. Tauhid Choudhury",
+    "alt": "Portrait of Engr. Tauhid Choudhury, member of the UIT Board of Trustees",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
+  },
+  {
+    "file": "bot-anowar-hossain.jpg",
+    "width": 230,
+    "height": 283,
+    "source": "BoT Members Photo/6. Anwar hossen.png",
+    "title": "Mr. Anowar Hossain",
+    "alt": "Portrait of Mr. Anowar Hossain, member of the UIT Board of Trustees",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
+  },
+  {
+    "file": "bot-nurul-huda.jpg",
+    "width": 1200,
+    "height": 1471,
+    "source": "BoT Members Photo/7. Nurul Huda.jpg",
+    "title": "Mr. Md. Nurul Huda",
+    "alt": "Portrait of Mr. Md. Nurul Huda, member of the UIT Board of Trustees",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
+  },
+  {
+    "file": "bot-reza-karim.jpg",
+    "width": 1026,
+    "height": 1280,
+    "source": "BoT Members Photo/8. Mr. Reza Karim.jpeg",
+    "title": "Engr. Reza Karim",
+    "alt": "Portrait of Engr. Reza Karim, member of the UIT Board of Trustees",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
+  },
+  {
+    "file": "bot-anam-chowdhury.jpg",
+    "width": 1118,
+    "height": 1416,
+    "source": "BoT Members Photo/9. Captain Md. Anam Chowdhury.jpeg",
+    "title": "Captain Md. Anam Chowdhury",
+    "alt": "Portrait of Captain (Merchant Marine) Md. Anam Chowdhury, member of the UIT Board of Trustees",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
+  },
+  {
+    "file": "bot-obaidur-rahman.jpg",
+    "width": 600,
+    "height": 600,
+    "source": "BoT Members Photo/10. Dr Obaid_ Passport Size Photo.jpg",
+    "title": "Dr. Mohammad Obaidur Rahman",
+    "alt": "Portrait of Dr. Mohammad Obaidur Rahman, member of the UIT Board of Trustees",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
+  },
+  {
+    "file": "bot-abdur-rahman-anwari.jpg",
+    "width": 754,
+    "height": 1023,
+    "source": "BoT Members Photo/11. Prof. Anwari.jpeg",
+    "title": "Prof. Dr. Md. Abdur Rahman Anwari",
+    "alt": "Portrait of Prof. Dr. Md. Abdur Rahman Anwari, member of the UIT Board of Trustees",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
+  },
+  {
+    "file": "bot-kabir-uddin.jpg",
+    "width": 266,
+    "height": 342,
+    "source": "BoT Members Photo/12. Prof. Khandakar Kabir Uddin.png",
+    "title": "Prof. Khandaker Kabir Uddin",
+    "alt": "Portrait of Prof. Khandaker Kabir Uddin, member of the UIT Board of Trustees",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
+  },
+  {
+    "file": "bot-salina-begum.jpg",
+    "width": 1026,
+    "height": 1280,
+    "source": "BoT Members Photo/13. Dr. Salina Begum.jpeg",
+    "title": "Dr. Salina Begum",
+    "alt": "Portrait of Dr. Salina Begum, member of the UIT Board of Trustees",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
+  },
+  {
+    "file": "bot-abdus-subhan-azhary.jpg",
+    "width": 743,
+    "height": 879,
+    "source": "BoT Members Photo/14. Sheikh Abdus Sobhan Azhari.jpeg",
+    "title": "Mr. Muhammad Abdus Subhan Azhary",
+    "alt": "Portrait of Mr. Muhammad Abdus Subhan Azhary, member of the UIT Board of Trustees",
+    "category": "GOVERNANCE",
+    "folder": "Leadership",
+    "tags": ["leadership", "board-of-trustees"]
   }
 ]

@@ -20,9 +20,9 @@ export interface SeedPage {
 const html = (...parts: string[]) => ({ type: 'RICH_TEXT', data: { html: parts.join('') } });
 const heading = (text: string, eyebrow = '') => ({ type: 'HEADING', data: { text, eyebrow, level: 2 } });
 const image = (file: string, caption: string, size: 'inline' | 'wide' | 'full' = 'wide') => ({ type: 'IMAGE', data: { mediaId: `@${file}`, caption, size } });
-const cards = (title: string, list: { title: string; text?: string; url?: string; badge?: string; image?: string }[], columns = 3, intro = '') => ({
+const cards = (title: string, list: { title: string; text?: string; url?: string; badge?: string; image?: string }[], columns = 3, intro = '', variant: 'standard' | 'people' = 'standard') => ({
   type: 'CARD_GRID',
-  data: { title, intro, columns, cards: list.map(({ image: img, ...c }) => ({ ...c, imageId: img ? `@${img}` : null })) },
+  data: { title, intro, columns, variant, cards: list.map(({ image: img, ...c }) => ({ ...c, imageId: img ? `@${img}` : null })) },
 });
 const dynamic = (module: string, title = '', intro = '', category = '', limit = 12) => ({ type: 'DYNAMIC', data: { module, title, intro, category, limit } });
 const cta = (title: string, text: string, buttons: { label: string; url: string; style?: string }[]) => ({ type: 'CTA', data: { title, text, buttons } });
@@ -70,8 +70,9 @@ export const PAGES: SeedPage[] = [
         { title: 'Vision & Mission', text: 'What UIT aims to become and whom it serves.', url: '/about/vision-mission' },
         { title: 'Philosophy', text: 'The integrated model of curriculum, teaching and assessment.', url: '/about/philosophy' },
         { title: 'History & Milestones', text: 'From BIIT\'s founding work to the Ministry approval.', url: '/about/history' },
+        { title: 'Leadership', text: 'The Board of Trustees, advisers and designated academic officers.', url: '/about/leadership' },
         { title: 'Campus', text: 'The temporary campus today and the planned permanent campus.', url: '/campus' },
-      ], 4),
+      ], 3),
     ],
   },
   {
@@ -165,17 +166,54 @@ export const PAGES: SeedPage[] = [
     slug: 'about/leadership',
     title: 'Leadership & Governance',
     eyebrow: 'About UIT',
-    status: 'DRAFT',
-    needsVerification: true,
-    verificationNote: 'Names and titles are taken from source documents whose spellings differ (e.g. "Fazli Ilahi" / "Fazle Elahi", "Mozammel Hoq" / "Mozammel Hoque Khan", "Safiullah" / "Shafiullah"). Confirm official names, titles and photos before publishing.',
-    summary: 'UIT is governed by its Board of Trustees and led by academics and scholars.',
+    status: 'PUBLISHED',
+    seoDescription: 'The Board of Trustees, advisers, and designated Vice-Chancellor and Pro-Vice-Chancellor of the University of Integrated Thought.',
+    summary: 'The Board of Trustees, advisers and designated academic officers of the University of Integrated Thought.',
     blocks: [
       html(
-        '<p>The UIT Board of Trustees, approved by the RJSC (No. S-14449/2026), comprises senior academics, jurists, business leaders and professionals. Prof. Dr. M. Abdul Aziz, Director General of BIIT and Country Representative of IIIT (USA) in Bangladesh, is Chairman of the Board.</p>',
-        '<p>At its first meeting on 17 October 2025, the Board approved the provisional appointments of the university\'s academic management team:</p>',
-        '<ul><li>Prof. Dr. Muhammad Fazli Ilahi, Vice-Chancellor (former Vice-Chancellor of the Islamic University of Technology)</li><li>Prof. Dr. Md. Mozammel Hoq, Pro-Vice-Chancellor (retired Professor, Department of Microbiology, University of Dhaka)</li><li>Md. Safiullah, Treasurer (Senior Secretary, retired, Government of Bangladesh)</li></ul>',
-        '<p>Day-to-day management is planned to involve academicians, industrialists and religious scholars, with strategic direction from an International Board of Governors. The university commits to a strictly non-political stance.</p>',
+        '<p>The University of Integrated Thought is governed by its Board of Trustees, approved by the Registrar of Joint Stock Companies and Firms (RJSC No. S-14449/2026). The Board has designated the university’s academic officers. Advisers and consultants named by the university support its establishment.</p>',
       ),
+      cards('Academic leadership', [
+        {
+          title: 'Prof. Dr. Fazli Ilahi',
+          badge: 'Vice-Chancellor (Designated)',
+          text: 'Former Vice-Chancellor, Islamic University of Technology (IUT), OIC\nFormer Vice-Chancellor, Ahsanullah University of Science and Technology (AUST)',
+          image: 'vc-fazli-ilahi.jpg',
+        },
+        {
+          title: 'Prof. Dr. Md. Mozammel Hoq',
+          badge: 'Pro-Vice-Chancellor (Designated)',
+          text: 'Retired Professor, Department of Microbiology, University of Dhaka',
+          image: 'pro-vc-mozammel-hoq.jpg',
+        },
+      ], 2, 'Designated Vice-Chancellor and Pro-Vice-Chancellor.', 'people'),
+      cards('Board of Trustees', [
+        { title: 'Prof. Dr. M. Abdul Aziz', badge: 'Chairman', text: 'Director General, BIIT and Visiting Faculty, IUT-OIC', image: 'bot-abdul-aziz.jpg' },
+        { title: 'Alhaj Mohammad Abul Kalam', text: 'Managing Director, T.K. Group of Industries, Bangladesh', image: 'bot-abul-kalam.jpg' },
+        { title: 'Prof. Dr. Farid Ahmed', text: 'Faculty, Johns Hopkins University, USA', image: 'bot-farid-ahmed.jpg' },
+        { title: 'Prof. Dr. Mostafiz Chowdhury', text: 'Chairman, Mafiq Foundation, Washington, D.C., USA', image: 'bot-mostafiz-chowdhury.jpg' },
+        { title: 'Engr. Tauhid Choudhury', text: 'Businessman, Dallas, Texas, USA', image: 'bot-tauhid-choudhury.jpg' },
+        { title: 'Mr. Anowar Hossain', text: 'Treasurer, Delta Group', image: 'bot-anowar-hossain.jpg' },
+        { title: 'Mr. Md. Nurul Huda', text: 'Managing Director, Delta Hospital Limited', image: 'bot-nurul-huda.jpg' },
+        { title: 'Engr. Reza Karim', text: 'Chairman, Medical College for Women & Hospital', image: 'bot-reza-karim.jpg' },
+        { title: 'Captain (Merchant Marine) Md. Anam Chowdhury', text: 'Seafarer and businessman, Chittagong', image: 'bot-anam-chowdhury.jpg' },
+        { title: 'Dr. Mohammad Obaidur Rahman', text: 'Country Director, Human Relief Foundation UK, Bangladesh', image: 'bot-obaidur-rahman.jpg' },
+        { title: 'Prof. Dr. Md. Abdur Rahman Anwari', text: 'Islamic University, Kushtia', image: 'bot-abdur-rahman-anwari.jpg' },
+        { title: 'Prof. Khandaker Kabir Uddin', text: 'Researcher, Liverpool Hope University, UK', image: 'bot-kabir-uddin.jpg' },
+        { title: 'Dr. Salina Begum', text: 'Chairman, WASAQ Foundation, Dhaka', image: 'bot-salina-begum.jpg' },
+        { title: 'Mr. Muhammad Abdus Subhan Azhary', text: 'Religious Attaché, Embassy of Saudi Arabia in Dhaka, Bangladesh', image: 'bot-abdus-subhan-azhary.jpg' },
+      ], 4, 'Prof. Dr. M. Abdul Aziz, Director General of BIIT and Visiting Faculty of IUT-OIC, is Chairman of the Board.', 'people'),
+      cards('Advisers and consultants', [
+        { title: 'Dr. A.N.M. Ehsanul Haque Milon', text: 'Honorable Minister of Education, Bangladesh' },
+        { title: 'Justice Syed Refaat Ahmed', text: 'Former Chief Justice of Bangladesh' },
+        { title: 'Professor Dr. Sukomal Barua', text: 'Ekushey Padak (2006) and Independence Award (2026)' },
+        { title: 'Prof. Dr. Niaz Ahmed Khan', text: 'Former Vice-Chancellor, University of Dhaka' },
+        { title: 'Professor Emeritus Dr. Syed Saad Andaleeb', text: 'Former Vice-Chancellor, BRAC University, Bangladesh' },
+        { title: 'Professor Emeritus Datuk Dr. Osman Bakar', text: 'Former Rector, International Islamic University Malaysia (IIUM)' },
+        { title: 'Mr. Hisham Altalib', text: 'President, International Institute of Islamic Thought (IIIT), USA' },
+        { title: 'Dr. Millat-E-Mustafa', text: 'Senior Advisor, King Salman Humanitarian Aid & Relief Center, KSA' },
+        { title: 'Shaikh Dr. Abdal Hakim Murad', text: 'Cambridge Muslim College, UK' },
+      ], 3, 'Advisers and consultants named by the university.', 'people'),
     ],
   },
   {

@@ -310,12 +310,30 @@ function Block({ block, media }: BlockProps) {
       );
     case 'CARD_GRID': {
       const cols = { 2: 'md:grid-cols-2', 3: 'md:grid-cols-2 lg:grid-cols-3', 4: 'sm:grid-cols-2 lg:grid-cols-4' }[d.columns as 2 | 3 | 4] ?? 'md:grid-cols-3';
+      const people = d.variant === 'people';
+      const profile = people && d.columns === 2;
       return (
         <div>
           <BlockTitle title={d.title} intro={d.intro} />
-          <ul className={cn('grid gap-5', cols)}>
+          <ul className={cn('grid gap-5', cols, profile && 'mx-auto max-w-5xl')}>
             {(d.cards ?? []).map((c: { title: string; text?: string; url?: string; badge?: string; imageId?: string }, i: number) => {
               const img = c.imageId ? media[c.imageId] : null;
+              if (people) {
+                return (
+                  <li key={i} className={cn('flex flex-col overflow-hidden rounded-3xl border border-stone-line bg-white', profile && 'sm:flex-row')}>
+                    {img && (
+                      <div className={cn('overflow-hidden bg-sand', profile ? 'aspect-[4/5] sm:aspect-auto sm:w-52 sm:shrink-0' : 'aspect-[3/4]')}>
+                        <Img media={img} alt={c.title} sizes={profile ? '208px' : '(min-width: 1024px) 25vw, 50vw'} className="size-full object-top" />
+                      </div>
+                    )}
+                    <div className={cn('flex flex-1 flex-col', profile ? 'justify-center p-6 sm:p-8' : 'p-5')}>
+                      {c.badge && <p className="text-xs font-semibold tracking-[0.14em] text-teal-700 uppercase">{c.badge}</p>}
+                      <h3 className={cn('font-serif leading-snug', profile ? 'text-xl' : 'text-lg', c.badge && 'mt-2')}>{c.title}</h3>
+                      {c.text && <p className="mt-2 text-sm leading-relaxed whitespace-pre-line text-ink-700/80">{c.text}</p>}
+                    </div>
+                  </li>
+                );
+              }
               return (
                 <li key={i} className="group relative flex flex-col overflow-hidden rounded-3xl border border-stone-line bg-white transition hover:shadow-soft">
                   {img && <div className="aspect-[16/10] overflow-hidden"><Img media={img} sizes="(min-width: 1024px) 33vw, 100vw" className="size-full" /></div>}

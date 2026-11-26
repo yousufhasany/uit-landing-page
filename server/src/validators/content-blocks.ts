@@ -141,6 +141,7 @@ export const PAGE_BLOCK_SCHEMAS = {
     title: optionalText(200),
     intro: optionalText(800),
     columns: z.union([z.literal(2), z.literal(3), z.literal(4)]).default(3),
+    variant: z.enum(['standard', 'people']).default('standard'),
     cards: z
       .array(z.object({ title: text(160), text: optionalText(1200), url: safeUrl.optional().default(''), badge: optionalText(40), imageId: mediaRef }))
       .max(24)

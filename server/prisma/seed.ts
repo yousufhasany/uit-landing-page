@@ -261,6 +261,79 @@ async function seedPages(adminId: string | null) {
   log(`pages: ${PAGES.length} (${created} new)`);
 }
 
+/** Publishes the leadership page when an older draft is still in the database. Leaves a page that already has the Board portraits untouched. */
+async function publishLeadership(adminId: string | null) {
+  const seedPage = PAGES.find((p) => p.slug === 'about/leadership');
+  if (!seedPage) return;
+  const existing = await prisma.page.findUnique({ where: { slug: 'about/leadership' }, include: { sections: true } });
+  const current = existing?.sections.some((section) => {
+    const data = section.data as { variant?: string; title?: string };
+    return data?.variant === 'people' && data.title === 'Board of Trustees';
+  });
+  if (existing && !current) {
+    const content = pageContentInput.parse(
+      resolveRefs({
+        title: seedPage.title, slug: seedPage.slug, eyebrow: seedPage.eyebrow ?? null, summary: seedPage.summary,
+        template: seedPage.template ?? 'standard', featuredImageId: null, seoDescription: seedPage.seoDescription ?? null,
+        needsVerification: false, verificationNote: null, blocks: seedPage.blocks,
+      }),
+    );
+    const { blocks, ...fields } = content;
+    await prisma.$transaction(async (tx) => {
+      await tx.page.update({
+        where: { id: existing.id },
+        data: {
+          ...fields,
+          status: 'PUBLISHED',
+          publishedAt: existing.publishedAt ?? new Date(),
+          draftData: Prisma.DbNull,
+          hasDraftChanges: false,
+          updatedById: adminId,
+        },
+      });
+      await tx.pageSection.deleteMany({ where: { pageId: existing.id } });
+      await tx.pageSection.createMany({
+        data: blocks.map((b, order) => ({
+          pageId: existing.id,
+          type: b.type,
+          order,
+          data: (b.type === 'RICH_TEXT' ? { ...b.data, html: sanitizeRichText(String(b.data.html)) } : b.data) as Prisma.InputJsonValue,
+        })),
+      });
+    });
+    log('leadership: published Board, advisers and designated officers');
+  }
+
+  await prisma.navigationItem.updateMany({
+    where: { url: '/about/leadership' },
+    data: { isVisible: true, description: 'Board, advisers and academic officers' },
+  });
+
+  const footer = await prisma.navigationMenu.findUnique({ where: { key: 'footer-explore' } });
+  if (footer && !(await prisma.navigationItem.findFirst({ where: { menuId: footer.id, url: '/about/leadership' } }))) {
+    const page = await prisma.page.findUnique({ where: { slug: 'about/leadership' }, select: { id: true } });
+    const count = await prisma.navigationItem.count({ where: { menuId: footer.id, parentId: null } });
+    await prisma.navigationItem.create({
+      data: { menuId: footer.id, label: 'Leadership', url: '/about/leadership', pageId: page?.id ?? null, displayOrder: count, isVisible: true },
+    });
+  }
+
+  const about = await prisma.page.findUnique({ where: { slug: 'about' }, include: { sections: true } });
+  const learn = about?.sections.find((section) => section.type === 'CARD_GRID' && (section.data as { title?: string }).title === 'Learn more');
+  if (learn) {
+    const data = learn.data as { cards?: { title?: string; url?: string; text?: string; badge?: string; imageId?: string | null }[]; columns?: number };
+    if (!data.cards?.some((card) => card.url === '/about/leadership')) {
+      const next = [...(data.cards ?? [])];
+      const campusAt = next.findIndex((card) => card.url === '/campus');
+      const card = { title: 'Leadership', text: 'The Board of Trustees, advisers and designated academic officers.', url: '/about/leadership', badge: '', imageId: null };
+      if (campusAt >= 0) next.splice(campusAt, 0, card);
+      else next.push(card);
+      await prisma.pageSection.update({ where: { id: learn.id }, data: { data: { ...data, columns: 3, cards: next } as Prisma.InputJsonValue } });
+      log('about: linked Leadership');
+    }
+  }
+}
+
 async function seedNews(adminId: string | null) {
   for (const c of NEWS_CATEGORIES) {
     await prisma.newsCategory.upsert({ where: { slug: slugify(c.name) }, update: {}, create: { ...c, slug: slugify(c.name) } });
@@ -334,6 +407,7 @@ async function main() {
   await seedPages(adminId);
   await seedNews(adminId);
   await seedMenus();
+  await publishLeadership(adminId);
   await seedHomepage(adminId);
   console.log('Seed complete.');
 }
